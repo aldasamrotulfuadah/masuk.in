@@ -5,23 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\SuratKeluar;
 use Illuminate\Http\Request;
 
-class SuratKeluarController extends Controller
+class SuratMasukController extends Controller
 {
     public function index(){
         $data = array(
-            'title'   => 'Data Surat Keluar',
-            'menuSuratKeluar'   => 'active',
-            'suratkeluar'   => suratkeluar::orderBy('sifat','asc')->get(),
+            'title'   => 'Data Surat Masuk',
+            'menuSuratMasuk'   => 'active',
+            'suratmasuk'   => suratmasuk::orderBy('sifat','asc')->get(),
         ); 
-        return view('suratK/suratkeluar',$data);
+        return view('suratm/suratmasuk',$data);
     }
     
     public function create(){
         $data = array(
-            'title'   => 'Tambah Data Surat Keluar',
-            'menuSuratKeluar'   => 'active',
+            'title'   => 'Tambah Data Surat Masuk',
+            'menuSuratMasuk'   => 'active',
         ); 
-        return view('suratk/create',$data);
+        return view('suratm/create',$data);
     }
 
     public function store(Request $request){
@@ -50,38 +50,38 @@ class SuratKeluarController extends Controller
             'dengan_hormat_harap.required'            => 'Disposisi Surat Harus Dipilih',
         ]);
 
-        $suratkeluar = new suratkeluar;
+        $suratmasuk = new suratmasuk;
         //Simpan File
         if ($request->hasFile('lampiran')) {
             $file = $request->file('lampiran');
             $namaFile = time().'_'.$file->getClientOriginalName();
             $file->storeAs('uploads/lampiran', $namaFile, 'public');
 
-            $suratkeluar->lampiran = 'uploads/lampiran/'.$namaFile;
+            $suratmasuk->lampiran = 'uploads/lampiran/'.$namaFile;
         }
-        $suratkeluar->no_urut                         = $request->no_urut;
-        $suratkeluar->tanggal_surat                   = $request->tanggal_surat;
-        $suratkeluar->nomor_surat                     = $request->nomor_surat;
-        $suratkeluar->diterima_dari                   = $request->diterima_dari;
-        $suratkeluar->perihal                         = $request->perihal;
-        $suratkeluar->sifat                           = $request->sifat;
-        $suratkeluar->tanggal_dan_tempat_pelaksanaan  = $request->tanggal_dan_tempat_pelaksanaan;
-        $suratkeluar->tanggal_diteruskan              = $request->tanggal_diteruskan;
-        $suratkeluar->diteruskan_kepada               = $request->diteruskan_kepada;
-        $suratkeluar->dengan_hormat_harap             = $request->dengan_hormat_harap;
+        $suratmasuk->no_urut                         = $request->no_urut;
+        $suratmasuk->tanggal_surat                   = $request->tanggal_surat;
+        $suratmasuk->nomor_surat                     = $request->nomor_surat;
+        $suratmasuk->diterima_dari                   = $request->diterima_dari;
+        $suratmasuk->perihal                         = $request->perihal;
+        $suratmasuk->sifat                           = $request->sifat;
+        $suratmasuk->tanggal_dan_tempat_pelaksanaan  = $request->tanggal_dan_tempat_pelaksanaan;
+        $suratmasuk->tanggal_diteruskan              = $request->tanggal_diteruskan;
+        $suratmasuk->diteruskan_kepada               = $request->diteruskan_kepada;
+        $suratmasuk->dengan_hormat_harap             = $request->dengan_hormat_harap;
         
-        $suratkeluar->save();
+        $suratmasuk->save();
 
-        return redirect()->route('suratkeluar')->with('success','Data Berhasil Ditambahkan');
+        return redirect()->route('suratmasuk')->with('success','Data Berhasil Ditambahkan');
     }
 
     public function edit($id){
         $data = array(
-            'title'   => 'Edit Data Surat Keluar',
-            'menuSuratKeluar'   => 'active',
-            'suratkeluar' => SuratKeluar::findOrFail($id),
+            'title'   => 'Edit Data Surat Masuk',
+            'menuSuratMasuk'   => 'active',
+            'suratmasuk' => SuratMasuk::findOrFail($id),
         ); 
-        return view('suratk/edit',$data);
+        return view('suratm/edit',$data);
     }
 
      public function update(Request $request, $id){
@@ -110,36 +110,36 @@ class SuratKeluarController extends Controller
             'dengan_hormat_harap.required'            => 'Disposisi Surat Harus Dipilih',
         ]);
 
-        $suratkeluar = SuratKeluar::findOrFail($id);
+        $suratmasuk = SuratMasuk::findOrFail($id);
         //Simpan File
         if ($request->hasFile('lampiran')) {
             $file = $request->file('lampiran');
             $namaFile = time().'_'.$file->getClientOriginalName();
             $file->storeAs('uploads/lampiran', $namaFile, 'public');
 
-            $suratkeluar->lampiran = 'uploads/lampiran/'.$namaFile;
+            $suratmasuk->lampiran = 'uploads/lampiran/'.$namaFile;
         }
-        $suratkeluar->no_urut                            = $request->no_urut;
-        $suratkeluar->tanggal_surat                      = $request->tanggal_surat;
-        $suratkeluar->nomor_surat                        = $request->nomor_surat;
-        $suratkeluar->diterima_dari                      = $request->diterima_dari;
-        $suratkeluar->perihal                            = $request->perihal;
-        $suratkeluar->sifat                              = $request->sifat;
-        $suratkeluar->tanggal_dan_tempat_pelaksanaan     = $request->tanggal_dan_tempat_pelaksanaan;
-        $suratkeluar->tanggal_diteruskan                 = $request->tanggal_diteruskan;
-        $suratkeluar->diteruskan_kepada                  = $request->diteruskan_kepada;
-        $suratkeluar->dengan_hormat_harap                = $request->dengan_hormat_harap;
+        $suratmasuk->no_urut                            = $request->no_urut;
+        $suratmasuk->tanggal_surat                      = $request->tanggal_surat;
+        $suratmasuk->nomor_surat                        = $request->nomor_surat;
+        $suratmasuk->diterima_dari                      = $request->diterima_dari;
+        $suratmasuk->perihal                            = $request->perihal;
+        $suratmasuk->sifat                              = $request->sifat;
+        $suratmasuk->tanggal_dan_tempat_pelaksanaan     = $request->tanggal_dan_tempat_pelaksanaan;
+        $suratmasuk->tanggal_diteruskan                 = $request->tanggal_diteruskan;
+        $suratmasuk->diteruskan_kepada                  = $request->diteruskan_kepada;
+        $suratmasuk->dengan_hormat_harap                = $request->dengan_hormat_harap;
          
-        $suratkeluar->save();
+        $suratmasuk->save();
 
-        return redirect()->route('suratkeluar')->with('success','Data Berhasil Di Edit');
+        return redirect()->route('suratmasuk')->with('success','Data Berhasil Di Edit');
     }
 
     public function destroy($id){
-        $suratkeluar = SuratKeluar::findOrFail($id);
-        $suratkeluar->delete();
+        $suratmasuk = SuratMasuk::findOrFail($id);
+        $suratmasuk->delete();
 
-        return redirect()->route('suratkeluar')->with('success', 'Data Berhasil Di Hapus');
+        return redirect()->route('suratmasuk')->with('success', 'Data Berhasil Di Hapus');
     }
-        
+
 }

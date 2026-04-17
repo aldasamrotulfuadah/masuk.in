@@ -13,7 +13,7 @@ class SuratKeluarController extends Controller
             'menuSuratKeluar'   => 'active',
             'suratkeluar'   => suratkeluar::orderBy('sifat','asc')->get(),
         ); 
-        return view('suratK/suratkeluar',$data);
+        return view('suratk/suratkeluar',$data);
     }
     
     public function create(){
@@ -26,17 +26,17 @@ class SuratKeluarController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'no_urut'                         => 'required',
-            'tanggal_surat'                   => 'required|date',
-            'nomor_surat'                     => 'required',
-            'diterima_dari'                   => 'required',
-            'perihal'                         => 'required',
-            'sifat'                           => 'required',
-            'tanggal_dan_tempat_pelaksanaan'  => 'required',
-            'tanggal_diteruskan'              => 'required|date',
-            'diteruskan_kepada'               => 'required',
-            'dengan_hormat_harap'             => 'required',
-            'lampiran'                        => 'nullable|file|mimes:pdf,jpg,jpeg,png,doc,docx|max:10240',
+            'no_urut'                           => 'required',
+            'tanggal_surat'                     => 'required|date',
+            'nomor_surat'                       => 'required',
+            'diterima_dari'                     => 'required',
+            'perihal'                           => 'required',
+            'sifat'                             => 'required',
+            'tanggal_dan_tempat_pelaksanaan'    => 'required',
+            'tanggal_diteruskan'                => 'required|date',
+            'diteruskan_kepada'                 => 'required',
+            'dengan_hormat_harap'               => 'required',
+            'lampiran'                          => 'nullable|file|mimes:pdf,jpg,jpeg,png,doc,docx|max:10240',
         ],[
             'no_urut.required'                        => 'No Urut Surat Tidak Boleh Kosong',
             'tanggal_surat.required'                  => 'Tanggal Surat Tidak Boleh Kosong',
@@ -59,17 +59,16 @@ class SuratKeluarController extends Controller
 
             $suratkeluar->lampiran = 'uploads/lampiran/'.$namaFile;
         }
-        $suratkeluar->no_urut                         = $request->no_urut;
-        $suratkeluar->tanggal_surat                   = $request->tanggal_surat;
-        $suratkeluar->nomor_surat                     = $request->nomor_surat;
-        $suratkeluar->diterima_dari                   = $request->diterima_dari;
-        $suratkeluar->perihal                         = $request->perihal;
-        $suratkeluar->sifat                           = $request->sifat;
-        $suratkeluar->tanggal_dan_tempat_pelaksanaan  = $request->tanggal_dan_tempat_pelaksanaan;
-        $suratkeluar->tanggal_diteruskan              = $request->tanggal_diteruskan;
-        $suratkeluar->diteruskan_kepada               = $request->diteruskan_kepada;
-        $suratkeluar->dengan_hormat_harap             = $request->dengan_hormat_harap;
-        
+        $suratkeluar->no_urut                           = $request->no_urut;
+        $suratkeluar->tanggal_surat                     = $request->tanggal_surat;
+        $suratkeluar->nomor_surat                       = $request->nomor_surat;
+        $suratkeluar->diterima_dari                     = $request->diterima_dari;
+        $suratkeluar->perihal                           = $request->perihal;
+        $suratkeluar->sifat                             = $request->sifat;
+        $suratkeluar->tanggal_dan_tempat_pelaksanaan    = $request->tanggal_dan_tempat_pelaksanaan;
+        $suratkeluar->tanggal_diteruskan                = $request->tanggal_diteruskan;
+        $suratkeluar->diteruskan_kepada                 = $request->diteruskan_kepada;
+        $suratkeluar->dengan_hormat_harap               = $request->dengan_hormat_harap;
         $suratkeluar->save();
 
         return redirect()->route('suratkeluar')->with('success','Data Berhasil Ditambahkan');
@@ -98,16 +97,16 @@ class SuratKeluarController extends Controller
             'dengan_hormat_harap'            => 'required',
             'lampiran'                       => 'nullable|file|mimes:pdf,jpg,jpeg,png,doc,docx|max:10240',
         ],[
-            'no_urut.required'                        => 'No Urut Surat Tidak Boleh Kosong',
-            'tanggal_surat.required'                  => 'Tanggal Surat Tidak Boleh Kosong',
-            'nomor_surat.required'                    => 'Nomor Surat Tidak Boleh Kosong',
-            'diterima_dari.required'                  => 'Tidak Boleh Kosong',
-            'perihal.required'                        => 'Perihal Surat Tidak Boleh Kosong',
-            'sifat.required'                          => 'Sifat Surat Harus Dipilih',
-            'tanggal_dan_tempat_pelaksanaan.required' => 'Tanggal dan Tempat Pelaksanaan Tidak Boleh Kosong',
-            'tanggal_diteruskan.required'             => 'Tanggal Diteruskan Tidak Boleh Kosong',
-            'diteruskan_kepada.required'              => 'Disposisi Surat Harus Dipilih',
-            'dengan_hormat_harap.required'            => 'Disposisi Surat Harus Dipilih',
+            'no_urut.required'                          => 'No Urut Surat Tidak Boleh Kosong',
+            'tanggal_surat.required'                    => 'Tanggal Surat Tidak Boleh Kosong',
+            'nomor_surat.required'                      => 'Nomor Surat Tidak Boleh Kosong',
+            'diterima_dari.required'                    => 'Tidak Boleh Kosong',
+            'perihal.required'                          => 'Perihal Surat Tidak Boleh Kosong',
+            'sifat.required'                            => 'Sifat Surat Harus Dipilih',
+            'tanggal_dan_tempat_pelaksanaan.required'   => 'Tanggal dan Tempat Pelaksanaan Tidak Boleh Kosong',
+            'tanggal_diteruskan.required'               => 'Tanggal Diteruskan Tidak Boleh Kosong',
+            'diteruskan_kepada.required'                => 'Disposisi Surat Harus Dipilih',
+            'dengan_hormat_harap.required'              => 'Disposisi Surat Harus Dipilih',
         ]);
 
         $suratkeluar = SuratKeluar::findOrFail($id);
@@ -119,17 +118,16 @@ class SuratKeluarController extends Controller
 
             $suratkeluar->lampiran = 'uploads/lampiran/'.$namaFile;
         }
-        $suratkeluar->no_urut                            = $request->no_urut;
-        $suratkeluar->tanggal_surat                      = $request->tanggal_surat;
-        $suratkeluar->nomor_surat                        = $request->nomor_surat;
-        $suratkeluar->diterima_dari                      = $request->diterima_dari;
-        $suratkeluar->perihal                            = $request->perihal;
-        $suratkeluar->sifat                              = $request->sifat;
-        $suratkeluar->tanggal_dan_tempat_pelaksanaan     = $request->tanggal_dan_tempat_pelaksanaan;
-        $suratkeluar->tanggal_diteruskan                 = $request->tanggal_diteruskan;
-        $suratkeluar->diteruskan_kepada                  = $request->diteruskan_kepada;
-        $suratkeluar->dengan_hormat_harap                = $request->dengan_hormat_harap;
-         
+        $suratkeluar->no_urut                           = $request->no_urut;
+        $suratkeluar->tanggal_surat                     = $request->tanggal_surat;
+        $suratkeluar->nomor_surat                       = $request->nomor_surat;
+        $suratkeluar->diterima_dari                     = $request->diterima_dari;
+        $suratkeluar->perihal                           = $request->perihal;
+        $suratkeluar->sifat                             = $request->sifat;
+        $suratkeluar->tanggal_dan_tempat_pelaksanaan    = $request->tanggal_dan_tempat_pelaksanaan;
+        $suratkeluar->tanggal_diteruskan                = $request->tanggal_diteruskan;
+        $suratkeluar->diteruskan_kepada                 = $request->diteruskan_kepada;
+        $suratkeluar->dengan_hormat_harap               = $request->dengan_hormat_harap;
         $suratkeluar->save();
 
         return redirect()->route('suratkeluar')->with('success','Data Berhasil Di Edit');
@@ -141,5 +139,6 @@ class SuratKeluarController extends Controller
 
         return redirect()->route('suratkeluar')->with('success', 'Data Berhasil Di Hapus');
     }
-        
+
+
 }

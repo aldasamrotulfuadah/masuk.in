@@ -13,7 +13,7 @@ class SuratKeluarController extends Controller
             'menuSuratKeluar'   => 'active',
             'suratkeluar'   => suratkeluar::orderBy('sifat','asc')->get(),
         ); 
-        return view('suratK/suratkeluar',$data);
+        return view('suratm/suratkeluar',$data);
     }
     
     public function create(){

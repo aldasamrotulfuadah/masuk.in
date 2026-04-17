@@ -13,7 +13,7 @@ class SuratKeluarController extends Controller
             'menuSuratKeluar'   => 'active',
             'suratkeluar'   => suratkeluar::orderBy('sifat','asc')->get(),
         ); 
-        return view('suratK/suratkeluar',$data);
+        return view('suratm/suratkeluar',$data);
     }
     
     public function create(){
@@ -122,24 +122,51 @@ class SuratKeluarController extends Controller
         $suratkeluar->no_urut                            = $request->no_urut;
         $suratkeluar->tanggal_surat                      = $request->tanggal_surat;
         $suratkeluar->nomor_surat                        = $request->nomor_surat;
-        $suratkeluar->diterima_dari                      = $request->diterima_dari;
-        $suratkeluar->perihal                            = $request->perihal;
-        $suratkeluar->sifat                              = $request->sifat;
-        $suratkeluar->tanggal_dan_tempat_pelaksanaan     = $request->tanggal_dan_tempat_pelaksanaan;
-        $suratkeluar->tanggal_diteruskan                 = $request->tanggal_diteruskan;
-        $suratkeluar->diteruskan_kepada                  = $request->diteruskan_kepada;
-        $suratkeluar->dengan_hormat_harap                = $request->dengan_hormat_harap;
+        $suratmasuk->diterima_dari                      = $request->diterima_dari;
+        $suratmasuk->perihal                            = $request->perihal;
+        $suratmasuk->sifat                              = $request->sifat;
+        $suratmasuk->tanggal_dan_tempat_pelaksanaan     = $request->tanggal_dan_tempat_pelaksanaan;
+        $suratmasuk->tanggal_diteruskan                 = $request->tanggal_diteruskan;
+        $suratmasuk->diteruskan_kepada                  = $request->diteruskan_kepada;
+        $suratmasuk->dengan_hormat_harap                = $request->dengan_hormat_harap;
          
-        $suratkeluar->save();
+        $suratmasuk->save();
 
-        return redirect()->route('suratkeluar')->with('success','Data Berhasil Di Edit');
+        return redirect()->route('suratmasuk')->with('success','Data Berhasil Di Edit');
     }
 
     public function destroy($id){
-        $suratkeluar = SuratKeluar::findOrFail($id);
-        $suratkeluar->delete();
+        $suratmasuk = SuratMasuk::findOrFail($id);
+        $suratmasuk->delete();
 
-        return redirect()->route('suratkeluar')->with('success', 'Data Berhasil Di Hapus');
+        return redirect()->route('suratmasuk')->with('success', 'Data Berhasil Di Hapus');
     }
-        
+
+        public function kirimWaSurat($id)
+{
+    $data = SuratMasuk::findOrFail($id);
+
+    // pastikan nomor WA sudah format internasional, contoh 6281234567890
+    $nomorWA = $data->no_wa; 
+
+    // bikin pesan default
+    $pesan = "📩 SURAT MASUK\n\n" .
+             "No Urut: ".$data->no_urut."\n" .
+             "Tanggal Surat: ".$data->tanggal_surat."\n" .
+             "Nomor Surat: ".$data->nomor_surat."\n" .
+             "Diterima Dari: ".$data->diterima_dari."\n" .
+             "Perihal: ".$data->perihal."\n" .
+             "Sifat: ".$data->sifat."\n" .
+             "Tanggal dan Tempat Pelaksanaan: ".$data->tanggal_dan_tempat_pelaksanaan."\n" .
+             "Tanggal Diteruskan: ".$data->tanggal_diteruskan."\n" .
+             "Dengan Hormat Harap: ".$data->dengan_hormat_harap."\n" .
+             "Diteruskan Kepada: ".$data->diteruskan_kepada;
+
+    // encode pesan untuk URL
+    $waLink = "https://wa.me/".$nomorWA."?text=".urlencode($pesan);
+
+    // redirect ke WA
+    return redirect()->away($waLink);
+}
+
 }
