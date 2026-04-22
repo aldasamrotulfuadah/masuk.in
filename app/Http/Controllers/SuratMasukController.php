@@ -160,7 +160,8 @@ class SuratMasukController extends Controller
              "Tanggal dan Tempat Pelaksanaan: ".$data->tanggal_dan_tempat_pelaksanaan."\n" .
              "Tanggal Diteruskan: ".$data->tanggal_diteruskan."\n" .
              "Dengan Hormat Harap: ".$data->dengan_hormat_harap."\n" .
-             "Diteruskan Kepada: ".$data->diteruskan_kepada;
+             "Diteruskan Kepada: ".$data->diteruskan_kepada."\n" .
+             "Lampiran: ".$data->lampiran;
 
     // encode pesan untuk URL
     $waLink = "https://wa.me/".$nomorWA."?text=".urlencode($pesan);
