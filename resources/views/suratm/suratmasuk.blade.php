@@ -64,7 +64,11 @@
                             <td>{{ $item->tanggal_diteruskan }}</td>
                             <td>{{ $item->diteruskan_kepada }}</td>
                             <td>{{ $item->dengan_hormat_harap }}</td>
-                            <td>{{ $item->lampiran }}</td>
+                            <td>
+                                 <a href="{{ url('storage/' . $item->lampiran) }}" target="_blank">
+                                    Lihat File
+                                </a>
+                            </td>
                             <td class="text-truncate" style="max-width: 150px;">
                                 <div class="d-flex justify-content-center align-items-center">
                                     <a href="{{ route('suratmasukEdit', $item->id) }}" class="btn btn-sm btn-secondary mr-1">
