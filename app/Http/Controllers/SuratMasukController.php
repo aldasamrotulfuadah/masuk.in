@@ -149,6 +149,12 @@ class SuratMasukController extends Controller
     // pastikan nomor WA sudah format internasional, contoh 6281234567890
     $nomorWA = $data->no_wa; 
 
+    //link lampiran
+    $linkFile = $data->lampiran 
+        ? url('storage/' . $data->lampiran) 
+        : 'Tidak ada lampiran';
+
+
     // bikin pesan default
     $pesan = "📩 SURAT MASUK\n\n" .
              "No Urut: ".$data->no_urut."\n" .
@@ -161,7 +167,7 @@ class SuratMasukController extends Controller
              "Tanggal Diteruskan: ".$data->tanggal_diteruskan."\n" .
              "Dengan Hormat Harap: ".$data->dengan_hormat_harap."\n" .
              "Diteruskan Kepada: ".$data->diteruskan_kepada."\n" .
-             "Lampiran: ".$data->lampiran;
+             "Lampiran:\n" . $linkFile;
 
     // encode pesan untuk URL
     $waLink = "https://wa.me/".$nomorWA."?text=".urlencode($pesan);
