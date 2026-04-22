@@ -65,8 +65,8 @@
                             <td>{{ $item->diteruskan_kepada }}</td>
                             <td>{{ $item->dengan_hormat_harap }}</td>
                             <td>
-                                 <a href="{{ url('storage/' . $item->lampiran) }}" target="_blank">
-                                    Lihat File
+                                 <a href="{{ url('storage/' . $item->lampiran) }}" target="_blank" class="btn btn-sm btn-secondary py-1 px-2 text-nowrap">
+                                    <i class="fas fa-file-pdf"></i> Lihat
                                 </a>
                             </td>
                             <td class="text-truncate" style="max-width: 150px;">
