@@ -56,9 +56,11 @@
                                 <a href="{{ route('userEdit', $item->id) }}" class="btn btn-sm btn-secondary">
                                     <i class="fas fa-edit"></i>
                                 </a>
+                                @if ($item->Jabatan != 'Admin')
                                 <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
                                     <i class="fas fa-trash"></i>
                                 </button>
+                                @endif
                                 @include('admin/modal')
                             </td>
                         </tr>
